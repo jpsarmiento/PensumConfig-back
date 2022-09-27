@@ -16,6 +16,13 @@ import { ReglaEntity } from './regla/regla.entity';
 import { ExamenEntity } from './examen/examen.entity';
 import { TerminoEntity } from './termino/termino.entity';
 import { CursoEntity } from './curso/curso.entity';
+import { ProgramaAreaModule } from './programa-area/programa-area.module';
+import { ProgramaRequisitoService } from './programa-requisito/programa-requisito.service';
+import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';
+import { AreaReglaModule } from './area-regla/area-regla.module';
+import { ReglaExamenModule } from './regla-examen/regla-examen.module';
+import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
+import { TerminoCursoModule } from './termino-curso/termino-curso.module';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, TypeOrmModule.forRoot({
@@ -29,9 +36,9 @@ import { CursoEntity } from './curso/curso.entity';
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }),
+    }), ProgramaAreaModule, ProgramaRequisitoModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ProgramaRequisitoService],
 })
 export class AppModule {}
