@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne} from 'typeorm';
 import { TerminoEntity } from '../termino/termino.entity';
+import { DepartamentoEntity } from '../departamento/departamento.entity';
 
 @Entity()
 export class CursoEntity {
@@ -10,7 +11,7 @@ export class CursoEntity {
  nombre: string;
  
  @Column()
- depto: string;
+ sigla: string;
 
  @Column()
  codigo: number;
@@ -26,4 +27,7 @@ export class CursoEntity {
 
  @ManyToMany(()=> TerminoEntity, termino => termino.cursos)
  terminos: TerminoEntity[];
+
+ @ManyToOne(()=> DepartamentoEntity, departamento => departamento.areas)
+ depto: DepartamentoEntity;
 }

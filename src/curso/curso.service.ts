@@ -25,9 +25,9 @@ export class CursoService {
     }
 
     async create(curso: CursoEntity): Promise<CursoEntity> {
-        if(curso.depto.length != 4) {
+        if(curso.sigla.length != 4) {
                 throw new BusinessLogicException(
-                    'El departamento del curso debe ser la sigla del departamento con 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
+                    'La sigla del curso debe ser la sigla del programa al que pertenece y tener 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
                 )
         }
         if(curso.codigo < 1000 || curso.codigo > 9999) {
@@ -48,9 +48,9 @@ export class CursoService {
         if (!persistedcurso)
           throw new BusinessLogicException("No se encontro el curso con el id dado", BusinessError.NOT_FOUND);
         
-        if(curso.depto.length != 4) {
+        if(curso.sigla.length != 4) {
             throw new BusinessLogicException(
-                'El departamento del curso debe ser la sigla del departamento con 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
+                'La sigla del curso debe ser la sigla del programa al que pertenece y tener 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
             )
         }
         if(curso.codigo < 1000 || curso.codigo > 9999) {

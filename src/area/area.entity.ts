@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
+import { DepartamentoEntity } from '../departamento/departamento.entity';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { ProgramaEntity } from '../programa/programa.entity';
 import { ReglaEntity } from '../regla/regla.entity';
 
@@ -22,4 +23,7 @@ export class AreaEntity {
  @ManyToMany(()=> ReglaEntity, regla => regla.areas)
  @JoinTable()
  reglas: ReglaEntity[];
+
+ @ManyToOne(()=> DepartamentoEntity, departamento => departamento.areas)
+ depto: DepartamentoEntity;
 }

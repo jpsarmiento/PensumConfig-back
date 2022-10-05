@@ -15,30 +15,25 @@ import { AreaEntity } from './area/area.entity';
 import { ReglaEntity } from './regla/regla.entity';
 import { ExamenEntity } from './examen/examen.entity';
 import { TerminoEntity } from './termino/termino.entity';
+import { DepartamentoEntity } from './departamento/departamento.entity';
 import { CursoEntity } from './curso/curso.entity';
-import { ProgramaAreaModule } from './programa-area/programa-area.module';
-import { ProgramaRequisitoService } from './programa-requisito/programa-requisito.service';
-import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';
-import { AreaReglaModule } from './area-regla/area-regla.module';
-import { ReglaExamenModule } from './regla-examen/regla-examen.module';
-import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
-import { TerminoCursoModule } from './termino-curso/termino-curso.module';
+import { DepartamentoModule } from './departamento/departamento.module';
 
 @Module({
-  imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, TypeOrmModule.forRoot({
+  imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, TypeOrmModule.forRoot({
     type: 'postgres',
     host: 'localhost',
     port: 5432,
     username: 'postgres',
     password: 'postgres',
     database: 'pensumconfig',
-    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity],
+    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity, DepartamentoEntity],
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }), ProgramaAreaModule, ProgramaRequisitoModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule,
+    }), 
   ],
   controllers: [AppController],
-  providers: [AppService, ProgramaRequisitoService],
+  providers: [AppService],
 })
 export class AppModule {}

@@ -12,5 +12,5 @@ export class TerminoEntity {
  cursos: CursoEntity[];
 
  @ManyToOne(()=> ReglaEntity, regla => regla.terminos)
- regla: ReglaEntity[];
+ regla: ReglaEntity;
 }
