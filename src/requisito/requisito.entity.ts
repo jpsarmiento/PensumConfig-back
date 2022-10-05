@@ -12,6 +12,6 @@ export class RequisitoEntity {
  @Column()
  descripcion: string;
 
- @ManyToMany(()=> ProgramaEntity, programa => programa.areas)
+ @ManyToMany(()=> ProgramaEntity, programa => programa.requisitos)
  programas: ProgramaEntity[];
 }
