@@ -9,16 +9,16 @@ import { faker } from '@faker-js/faker';
 describe('ExamenService', () => {
   let service: ExamenService;
   let repository: Repository<ExamenEntity>;
-  let examensList = []
+  let examenesList = []
 
   const seedDatabase = async () => {
    repository.clear();
-   examensList = [];
+   examenesList = [];
    for(let i = 0; i < 5; i++){
        const examen: ExamenEntity = await repository.save({
        nombre: "Examen nombre",
        min_nota: faker.datatype.number({min: 1, max: 5})})
-       examensList.push(examen);
+       examenesList.push(examen);
    }
  }
 
@@ -38,14 +38,14 @@ describe('ExamenService', () => {
   });
 
 
-  it('findAll should return all examens', async () => {
-    const examens: ExamenEntity[] = await service.findAll();
-    expect(examens).not.toBeNull();
-    expect(examens).toHaveLength(examensList.length);
+  it('findAll should return all examenes', async () => {
+    const examenes: ExamenEntity[] = await service.findAll();
+    expect(examenes).not.toBeNull();
+    expect(examenes).toHaveLength(examenesList.length);
   });
   
   it('findOne should return a examen by id', async () => {
-    const storedExamen: ExamenEntity =examensList[0];
+    const storedExamen: ExamenEntity =examenesList[0];
     const examen: ExamenEntity = await service.findOne(storedExamen.id);
     expect(examen).not.toBeNull();
     expect(examen.nombre).toEqual(storedExamen.nombre)
@@ -84,7 +84,7 @@ describe('ExamenService', () => {
   });
   
   it('update should modify a examen', async () => {
-    const examen: ExamenEntity = examensList[0];
+    const examen: ExamenEntity = examenesList[0];
     examen.nombre = "New name";
     examen.min_nota = 4;
     const updatedExamen: ExamenEntity = await service.update(examen.id, examen);
@@ -96,7 +96,7 @@ describe('ExamenService', () => {
   });
   
   it('update should throw an exception for an invalid examen', async () => {
-    let examen: ExamenEntity = examensList[0];
+    let examen: ExamenEntity = examenesList[0];
     examen = {
       ...examen, nombre: "New name", min_nota: 4
     }
@@ -104,14 +104,14 @@ describe('ExamenService', () => {
   });
   
   it('delete should remove a product', async () => {
-    const examen: ExamenEntity = examensList[0];
+    const examen: ExamenEntity = examenesList[0];
     await service.delete(examen.id);
     const deletedExamen: ExamenEntity = await repository.findOne({ where: { id: examen.id } })
     expect(deletedExamen).toBeNull();
   });
   
   it('delete should throw an exception for an invalid product', async () => {
-    const examen: ExamenEntity = examensList[0];
+    const examen: ExamenEntity = examenesList[0];
     await service.delete(examen.id);
     await expect(() => service.delete("0")).rejects.toHaveProperty("message", 'No se encontro el examen con el id dado')
   });

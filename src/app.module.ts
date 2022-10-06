@@ -18,6 +18,22 @@ import { TerminoEntity } from './termino/termino.entity';
 import { DepartamentoEntity } from './departamento/departamento.entity';
 import { CursoEntity } from './curso/curso.entity';
 import { DepartamentoModule } from './departamento/departamento.module';
+import { ProgramaRequisitoService } from './programa-requisito/programa-requisito.service';
+import { ProgramaAreaService } from './programa-area/programa-area.service';
+import { AreaReglaService } from './area-regla/area-regla.service';
+import { ReglaExamenService } from './regla-examen/regla-examen.service';
+import { ReglaTerminoService } from './regla-termino/regla-termino.service';
+import { TerminoCursoService } from './termino-curso/termino-curso.service';
+import { DepartamentoCursoService } from './departamento-curso/departamento-curso.service';
+import { DepartamentoAreaService } from './departamento-area/departamento-area.service';
+import { DepartamentoAreaModule } from './departamento-area/departamento-area.module';
+import { DepartamentoCursoModule } from './departamento-curso/departamento-curso.module';
+import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';
+import { ProgramaAreaModule } from './programa-area/programa-area.module';
+import { AreaReglaModule } from './area-regla/area-regla.module';
+import { ReglaExamenModule } from './regla-examen/regla-examen.module';
+import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
+import { TerminoCursoModule } from './termino-curso/termino-curso.module';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, TypeOrmModule.forRoot({
@@ -31,9 +47,9 @@ import { DepartamentoModule } from './departamento/departamento.module';
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }), 
+    }), DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, ProgramaRequisitoService, ProgramaAreaService, AreaReglaService, ReglaExamenService, ReglaTerminoService, TerminoCursoService, DepartamentoCursoService, DepartamentoAreaService],
 })
 export class AppModule {}
