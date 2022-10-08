@@ -101,32 +101,32 @@ describe('ReglaTerminoService', () => {
   });
 
   it('findTerminosByReglaId should return terminos by regla', async ()=>{
-    const terminos: TerminoEntity[] = await service.findTerminoesByReglaId(regla.id);
+    const terminos: TerminoEntity[] = await service.findTerminosByReglaId(regla.id);
     expect(terminos.length).toBe(5)
   });
 
   it('findTerminosByReglaId should throw an exception for an invalid regla', async () => {
-    await expect(()=> service.findTerminoesByReglaId("0")).rejects.toHaveProperty("message", 'No se encontro la regla con el id dado');
+    await expect(()=> service.findTerminosByReglaId("0")).rejects.toHaveProperty("message", 'No se encontro la regla con el id dado');
   });
 
   it('associateTerminosRegla should update terminos list for a regla', async () => {
     const newTermino: TerminoEntity = await terminoRepository.save({})
  
-    const updatedRegla: ReglaEntity = await service.associateTerminoesRegla(regla.id, [newTermino]);
+    const updatedRegla: ReglaEntity = await service.associateTerminosRegla(regla.id, [newTermino]);
     expect(updatedRegla.terminos.length).toBe(1);
   });
 
   it('associateTerminosRegla should throw an exception for an invalid regla', async () => {
     const newTermino: TerminoEntity = await terminoRepository.save({})
  
-    await expect(()=> service.associateTerminoesRegla("0", [newTermino])).rejects.toHaveProperty("message", 'No se encontro la regla con el id dado');
+    await expect(()=> service.associateTerminosRegla("0", [newTermino])).rejects.toHaveProperty("message", 'No se encontro la regla con el id dado');
   });
 
   it('associateTerminosRegla should throw an exception for an invalid termino', async () => {
     const newTermino: TerminoEntity = terminosList[0];
     newTermino.id = "0";
  
-    await expect(()=> service.associateTerminoesRegla(regla.id, [newTermino])).rejects.toHaveProperty("message", 'No se encontro el termino con el id dado');
+    await expect(()=> service.associateTerminosRegla(regla.id, [newTermino])).rejects.toHaveProperty("message", 'No se encontro el termino con el id dado');
   });
 
   it('deleteTerminoToRegla should remove a termino from a regla', async () => {

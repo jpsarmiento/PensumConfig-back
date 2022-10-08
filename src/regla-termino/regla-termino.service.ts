@@ -49,7 +49,7 @@ async findTerminoByReglaIdTerminoId(reglaId: string, terminoId: string): Promise
     return terminoRegla;
 }
 
-async findTerminoesByReglaId(reglaId: string): Promise<TerminoEntity[]> {
+async findTerminosByReglaId(reglaId: string): Promise<TerminoEntity[]> {
     const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
     if (!regla)
       throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)
@@ -57,7 +57,7 @@ async findTerminoesByReglaId(reglaId: string): Promise<TerminoEntity[]> {
     return regla.terminos;
 }
 
-async associateTerminoesRegla(reglaId: string, terminos: TerminoEntity[]): Promise<ReglaEntity> {
+async associateTerminosRegla(reglaId: string, terminos: TerminoEntity[]): Promise<ReglaEntity> {
     const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
     if (!regla)
       throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)

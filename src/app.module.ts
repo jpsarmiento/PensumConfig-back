@@ -34,6 +34,7 @@ import { AreaReglaModule } from './area-regla/area-regla.module';
 import { ReglaExamenModule } from './regla-examen/regla-examen.module';
 import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
 import { TerminoCursoModule } from './termino-curso/termino-curso.module';
+import { ReglaCursoController } from './regla-curso/regla-curso.controller';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, TypeOrmModule.forRoot({
@@ -49,7 +50,7 @@ import { TerminoCursoModule } from './termino-curso/termino-curso.module';
     keepConnectionAlive: true
     }), DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
   ],
-  controllers: [AppController],
+  controllers: [AppController, ReglaCursoController],
   providers: [AppService, ProgramaRequisitoService, ProgramaAreaService, AreaReglaService, ReglaExamenService, ReglaTerminoService, TerminoCursoService, DepartamentoCursoService, DepartamentoAreaService],
 })
 export class AppModule {}

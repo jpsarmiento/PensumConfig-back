@@ -1,4 +1,42 @@
-import { Controller } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
+import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
+import { CursoService } from './curso.service';
+import { plainToInstance } from 'class-transformer';
+import { CursoEntity } from './curso.entity';
+import { CursoDto } from './curso.dto';
 
-@Controller('curso')
-export class CursoController {}
+@Controller('cursos')
+@UseInterceptors(BusinessErrorsInterceptor)
+export class CursoController {
+
+    constructor(private readonly cursoService: CursoService) {}
+
+    
+    @Get()
+    async findAll() {
+        return await this.cursoService.findAll();
+    }
+
+    @Get(':cursoId')
+    async findOne(@Param('cursoId') cursoId: string) {
+        return await this.cursoService.findOne(cursoId);
+    }
+
+    @Post()
+    async create(@Body() cursoDto: CursoDto) {
+    const curso: CursoEntity = plainToInstance(CursoEntity, cursoDto);
+    return await this.cursoService.create(curso);
+    }
+
+    @Put(':cursoId')
+    async update(@Param('cursoId') cursoId: string, @Body() cursoDto: CursoDto) {
+    const curso: CursoEntity = plainToInstance(CursoEntity, cursoDto);
+    return await this.cursoService.update(cursoId, curso);
+    }
+
+    @Delete(':cursoId')
+    @HttpCode(204)
+    async delete(@Param('cursoId') cursoId: string) {
+      return await this.cursoService.delete(cursoId);
+    }
+}
