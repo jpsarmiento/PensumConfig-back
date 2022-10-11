@@ -34,10 +34,13 @@ import { AreaReglaModule } from './area-regla/area-regla.module';
 import { ReglaExamenModule } from './regla-examen/regla-examen.module';
 import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
 import { TerminoCursoModule } from './termino-curso/termino-curso.module';
-import { ReglaCursoController } from './regla-curso/regla-curso.controller';
 
 @Module({
-  imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, TypeOrmModule.forRoot({
+  imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, 
+    TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, 
+    DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule,
+    ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, 
+    TerminoCursoModule, TypeOrmModule.forRoot({
     type: 'postgres',
     host: 'localhost',
     port: 5432,
@@ -50,7 +53,7 @@ import { ReglaCursoController } from './regla-curso/regla-curso.controller';
     keepConnectionAlive: true
     }), DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
   ],
-  controllers: [AppController, ReglaCursoController],
-  providers: [AppService, ProgramaRequisitoService, ProgramaAreaService, AreaReglaService, ReglaExamenService, ReglaTerminoService, TerminoCursoService, DepartamentoCursoService, DepartamentoAreaService],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}
