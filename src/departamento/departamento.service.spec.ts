@@ -56,7 +56,7 @@ describe('DepartamentoService', () => {
   it('create should return a new departamento', async () => {
     const departamento: DepartamentoEntity = {
       id: "",
-      nombre: "Departamento Y",
+      nombre: "Musica",
       cursos: null,
       areas: null
     }
@@ -71,7 +71,7 @@ describe('DepartamentoService', () => {
   
   it('update should modify a departamento', async () => {
     const departamento: DepartamentoEntity = departamentosList[0];
-    departamento.nombre = "Nuevo nombre";
+    departamento.nombre = "Antropologia";
     const updatedDepartamento: DepartamentoEntity = await service.update(departamento.id, departamento);
     expect(updatedDepartamento).not.toBeNull();
     const storedDepartamento: DepartamentoEntity = await repository.findOne({ where: { id: departamento.id } })
@@ -82,7 +82,7 @@ describe('DepartamentoService', () => {
   it('update should throw an exception for an invalid departamento', async () => {
     let departamento: DepartamentoEntity = departamentosList[0];
     departamento = {
-      ...departamento, nombre: "Nuevo nombre"
+      ...departamento, nombre: "Diseño"
     }
     await expect(() => service.update("0", departamento)).rejects.toHaveProperty("message", 'No se encontro el departamento con el id dado')
   });

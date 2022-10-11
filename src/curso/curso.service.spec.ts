@@ -67,7 +67,7 @@ describe('CursoService', () => {
       id: "",
       nombre: "Curso X",
       sigla: "MINE",
-      codigo: faker.datatype.number({min: 1001, max: 9999}),
+      codigo: faker.datatype.number({min: 1001, max: 7000}),
       creditos: faker.datatype.number({min: 1, max: 10}),
       es_epsilon: false,
       es_tipo_e: false,
@@ -98,7 +98,7 @@ describe('CursoService', () => {
       depto: null,
       terminos: null
     }
-    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 9999')
+    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000')
   });
   
   it('update should modify a curso', async () => {

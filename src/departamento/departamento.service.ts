@@ -4,6 +4,15 @@ import { BusinessError, BusinessLogicException } from '../shared/errors/business
 import { Repository } from 'typeorm';
 import { DepartamentoEntity } from './departamento.entity';
 
+var deptos =    ['Centro de Estudios en Periodismo', 'Antropologia',
+                'Arquitectura', 'Arte', 'Ciencia Politica', 'Ciencias Biologicas',
+                'Diseño','Filosofia','Fisica','Geociencias','Historia','Historia del Arte',
+                'Humanidades y Literatura','Ingenieria Biomedica','Ingenieria Civil y Ambiental',
+                'Ingenieria de Sistemas y Computacion','Ingenieria Electrica y Electronica',
+                'Ingenieria Industrial','Ingenieria Mecanica','Ingenieria Quimica y de Alimentos',
+                'Lenguas y Cultura','Matematicas','Musica','Psicologia','Quimica'
+            ]
+
 @Injectable()
 export class DepartamentoService {
 
@@ -24,7 +33,21 @@ export class DepartamentoService {
         return departamento;
     }
 
+    async findNombre(nombre: string):Promise<DepartamentoEntity[]> {
+        return await this.departamentoRepository.find({where: {nombre: nombre}});
+    }
+
     async create(departamento: DepartamentoEntity): Promise<DepartamentoEntity> {
+        if((await this.findNombre(departamento.nombre)).length != 0) {
+            throw new BusinessLogicException(
+                'Ya existe un departamento con este nombre', BusinessError.PRECONDITION_FAILED
+            )
+        }
+        if(!deptos.includes(departamento.nombre)) {
+            throw new BusinessLogicException(
+                'El nombre del departamento debe ser el nombre de un departamento de la universidad', BusinessError.PRECONDITION_FAILED
+            )
+        }
         return await this.departamentoRepository.save(departamento);
     }
 
@@ -33,6 +56,18 @@ export class DepartamentoService {
         if (!persistedDepartamento)
           throw new BusinessLogicException("No se encontro el departamento con el id dado", BusinessError.NOT_FOUND);
          
+        if(persistedDepartamento.nombre != departamento.nombre) {
+            if((await this.findNombre(departamento.nombre)).length != 0) {
+                throw new BusinessLogicException(
+                    'Ya existe un departamento con este nombre', BusinessError.PRECONDITION_FAILED
+                )
+            }
+            if(!deptos.includes(departamento.nombre)) {
+                throw new BusinessLogicException(
+                    'El nombre del departamento debe ser el nombre de un departamento de la universidad', BusinessError.PRECONDITION_FAILED
+                )
+            }
+        }
         return await this.departamentoRepository.save({...persistedDepartamento, ...departamento,});
     }
 

@@ -4,6 +4,19 @@ import { BusinessError, BusinessLogicException } from '../shared/errors/business
 import { Repository } from 'typeorm';
 import { CursoEntity } from './curso.entity';
 
+var siglas =    ['ADMI','AFIN','ANTR','ARQT','ARQU','ARTE','ARTI','AUTO','BCOM','BIOL',
+                'CBCA','CBCC','CBCO','CBIO','CBPC','CHNA','CIDE','CISO','CONT','CPER','CPOL',
+                'DADM','DCOM','DDER','DECA','DEIN','DEMP','DENI','DEPI','DEPO','DEPR','DERE',
+                'DGGJ','DGIT','DISE','DISO','DLIT','DMIN','DPRO','DPUB','DPUC','ECON','EDUC',
+                'EECO','EGOB','EINT','EMAT','EMBA','ENEG','EPAH','EPID','ESCR','ETRI','FARH',
+                'FCIE','FILO','FISI','GEOC','GLOB','GPUB','HART','HDIG','HIST','IALI','IBIO',
+                'ICYA','IDOC','IELE','IIND','IING','IMEC','IMER','INTL','IQUI','ISIS','LEGI',
+                'LENG','LITE','MADM','MAIA','MART','MATE','MBAE','MBIO','MBIT','MCLA','MDER',
+                'MDIS','MECA','MECU','MEDI','MFIN','MGAD','MGAP','MGEO','MGIT','MGLO','MGPA',
+                'MGPD','MGPU','MHAR','MIFI','MIIA','MIID','MINE','MINT','MISO','MISW','MLIT',
+                'MMER','MMUS','MPAZ','MPCU','MPER','MPET','MSCM','MSIN','MTRI','MTRM','MUSI',
+                'PATO','PEDI','PMED','PSCL','PSIC','QUIM','SOCI','SPUB','STRA','VICE']
+
 @Injectable()
 export class CursoService {
 
@@ -24,15 +37,24 @@ export class CursoService {
         return curso;
     }
 
+    async findCodigoSigla(sigla: string, codigo: number):Promise<CursoEntity[]> {
+        return await this.cursoRepository.find({where: {sigla: sigla, codigo: codigo}});
+    }
+
     async create(curso: CursoEntity): Promise<CursoEntity> {
-        if(curso.sigla.length != 4) {
+        if((await this.findCodigoSigla(curso.sigla, curso.codigo)).length != 0) {
+            throw new BusinessLogicException(
+                'Ya existe un curso con esta sigla y codigo', BusinessError.PRECONDITION_FAILED
+            )
+        }
+        if(!siglas.includes(curso.sigla)) {
                 throw new BusinessLogicException(
-                    'La sigla del curso debe ser la sigla del programa al que pertenece y tener 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
+                    'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
                 )
         }
-        if(curso.codigo < 1000 || curso.codigo > 9999) {
+        if(curso.codigo < 1000 || curso.codigo > 7000) {
                 throw new BusinessLogicException(
-                    'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 9999', BusinessError.PRECONDITION_FAILED
+                    'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000', BusinessError.PRECONDITION_FAILED
                 )
         }
         if(curso.creditos < 0) {
@@ -47,16 +69,23 @@ export class CursoService {
         const persistedcurso: CursoEntity = await this.cursoRepository.findOne({where:{id}});
         if (!persistedcurso)
           throw new BusinessLogicException("No se encontro el curso con el id dado", BusinessError.NOT_FOUND);
-        
-        if(curso.sigla.length != 4) {
-            throw new BusinessLogicException(
-                'La sigla del curso debe ser la sigla del programa al que pertenece y tener 4 caracteres de longitud', BusinessError.PRECONDITION_FAILED
-            )
-        }
-        if(curso.codigo < 1000 || curso.codigo > 9999) {
-            throw new BusinessLogicException(
-                'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 9999', BusinessError.PRECONDITION_FAILED
-            )
+
+        if(persistedcurso.sigla != curso.sigla || persistedcurso.codigo != curso.codigo) {
+            if((await this.findCodigoSigla(curso.sigla, curso.codigo)).length != 0) {
+                throw new BusinessLogicException(
+                    'Ya existe un curso con esta sigla y codigo', BusinessError.PRECONDITION_FAILED
+                )
+            }
+            if(!siglas.includes(curso.sigla)) {
+                throw new BusinessLogicException(
+                    'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
+                )
+            }
+            if(curso.codigo < 1000 || curso.codigo > 7000) {
+                throw new BusinessLogicException(
+                    'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000', BusinessError.PRECONDITION_FAILED
+                )
+            }
         }
         if(curso.creditos < 0) {
             throw new BusinessLogicException(
