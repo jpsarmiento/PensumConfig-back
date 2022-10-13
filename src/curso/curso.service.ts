@@ -26,11 +26,11 @@ export class CursoService {
     ){}
 
     async findAll(): Promise<CursoEntity[]> {
-        return await this.cursoRepository.find({ relations: ["terminos"] });
+        return await this.cursoRepository.find({ relations: ["terminos","depto"] });
     }
 
     async findOne(id: string): Promise<CursoEntity> {
-        const curso: CursoEntity = await this.cursoRepository.findOne({where: {id}, relations: ["terminos"] } );
+        const curso: CursoEntity = await this.cursoRepository.findOne({where: {id}, relations: ["terminos","depto"] } );
         if (!curso)
           throw new BusinessLogicException("No se encontro el curso con el id dado", BusinessError.NOT_FOUND);
    
