@@ -48,12 +48,12 @@ export class ReglaService {
         if (!persistedregla)
           throw new BusinessLogicException("No se encontro el regla con el id dado", BusinessError.NOT_FOUND);
         
-        if(regla.semestre_inicio < 200000 || regla.semestre_inicio > 205000) {
+        if(regla.semestre_inicio < 200000 || regla.semestre_inicio > 205002) {
             throw new BusinessLogicException(
                 'El semestre de inicio de la regla debe ser entre el semestre 2000-01 y el semestre 2050-02', BusinessError.PRECONDITION_FAILED
             )
         }
-        if(regla.semestre_vigencia < 200000 || regla.semestre_vigencia > 205000) {
+        if(regla.semestre_vigencia < 200000 || regla.semestre_vigencia > 205002) {
             throw new BusinessLogicException(
                 'El semestre de vigencia de la regla debe ser entre el semestre 2000-01 y el semestre 2050-02', BusinessError.PRECONDITION_FAILED
             )
