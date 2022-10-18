@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { ProgramaService } from './programa.service';

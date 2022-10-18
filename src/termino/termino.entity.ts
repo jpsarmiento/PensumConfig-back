@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne, JoinTable } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne, JoinTable } from 'typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
 import { CursoEntity } from '../curso/curso.entity';
 

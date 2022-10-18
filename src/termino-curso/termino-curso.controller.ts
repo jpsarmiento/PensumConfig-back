@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { CursoDto } from '../curso/curso.dto';
@@ -11,7 +12,7 @@ export class TerminoCursoController {
     constructor(private readonly terminoCursoService: TerminoCursoService){}
 
     @Post(':terminoId/cursos/:cursoId')
-    async addCursoProduct(@Param('terminoId') terminoId: string, @Param('cursoId') cursoId: string){
+    async addCursoTermino(@Param('terminoId') terminoId: string, @Param('cursoId') cursoId: string){
     return await this.terminoCursoService.addCursoToTermino(terminoId, cursoId);
     }
 
