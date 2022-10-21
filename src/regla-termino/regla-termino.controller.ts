@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { TerminoDto } from '../termino/termino.dto';

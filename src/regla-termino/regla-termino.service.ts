@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
@@ -20,7 +21,7 @@ export class ReglaTerminoService {
 
 
    async addTerminoToRegla(reglaId: string, terminoId: string): Promise<ReglaEntity> {
-    const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminoId}});
+    const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminoId}, relations: ["cursos"]});
     if (!termino)
       throw new BusinessLogicException('No se encontro el termino con el id dado', BusinessError.NOT_FOUND);
   
@@ -33,7 +34,7 @@ export class ReglaTerminoService {
   }
 
 async findTerminoByReglaIdTerminoId(reglaId: string, terminoId: string): Promise<TerminoEntity> {
-    const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminoId}});
+    const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminoId}, relations: ["cursos"]});
     if (!termino)
       throw new BusinessLogicException('No se encontro el termino con el id dado', BusinessError.NOT_FOUND)
    
@@ -46,16 +47,27 @@ async findTerminoByReglaIdTerminoId(reglaId: string, terminoId: string): Promise
     if (!terminoRegla)
       throw new BusinessLogicException('El termino con el id dado no esta asociado a la regla', BusinessError.PRECONDITION_FAILED)
 
-    return terminoRegla;
+    return termino;
 }
 
 async findTerminosByReglaId(reglaId: string): Promise<TerminoEntity[]> {
-    const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
+    const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos", "terminos.cursos"]});
     if (!regla)
       throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)
    
     return regla.terminos;
 }
+
+/*
+async findTerminosByReglaId(reglaId: string): Promise<TerminoEntity[]> {
+  const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
+  if (!regla)
+    throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)
+  const terminos: TerminoEntity[] = await this.terminoRepository.find({ where: {regla: regla}, relations: ["regla","cursos"] })
+ 
+  return terminos;
+}
+ */
 
 async associateTerminosRegla(reglaId: string, terminos: TerminoEntity[]): Promise<ReglaEntity> {
     const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
@@ -63,7 +75,7 @@ async associateTerminosRegla(reglaId: string, terminos: TerminoEntity[]): Promis
       throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)
 
     for (let i = 0; i < terminos.length; i++) {
-      const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminos[i].id}});
+      const termino: TerminoEntity = await this.terminoRepository.findOne({where: {id: terminos[i].id}, relations: ["cursos"]});
       if (!termino)
         throw new BusinessLogicException("No se encontro el termino con el id dado", BusinessError.NOT_FOUND)
     }

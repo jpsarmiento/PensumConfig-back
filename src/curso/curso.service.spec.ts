@@ -18,7 +18,7 @@ describe('CursoService', () => {
        const curso: CursoEntity = await repository.save({
        nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
        es_epsilon: false,
        es_tipo_e: false})

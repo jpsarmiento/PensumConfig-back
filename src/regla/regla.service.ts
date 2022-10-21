@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
@@ -13,7 +14,7 @@ export class ReglaService {
     ){}
 
     async findAll(): Promise<ReglaEntity[]> {
-        return await this.reglaRepository.find({ relations: ["examenes", "terminos","areas"] });
+        return await this.reglaRepository.find({ relations: ["examenes", "terminos", "terminos.cursos","areas"] });
     }
 
     async findOne(id: string): Promise<ReglaEntity> {
