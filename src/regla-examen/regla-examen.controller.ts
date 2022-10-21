@@ -10,28 +10,28 @@ import { ReglaExamenService } from './regla-examen.service';
 export class ReglaExamenController {
     constructor(private readonly reglaExamenService: ReglaExamenService){}
 
-    @Post(':reglaId/examens/:examenId')
+    @Post(':reglaId/examenes/:examenId')
     async addExamenProduct(@Param('reglaId') reglaId: string, @Param('examenId') examenId: string){
     return await this.reglaExamenService.addExamenToRegla(reglaId, examenId);
     }
 
-    @Get(':reglaId/examens/:examenId')
+    @Get(':reglaId/examenes/:examenId')
     async findExamenByReglaIdExamenId(@Param('reglaId') reglaId: string, @Param('examenId') examenId: string){
     return await this.reglaExamenService.findExamenByReglaIdExamenId(reglaId, examenId);
     }
 
-    @Get(':reglaId/examens')
+    @Get(':reglaId/examenes')
     async findExamensByReglaId(@Param('reglaId') reglaId: string){
     return await this.reglaExamenService.findExamenesByReglaId(reglaId);
     }
 
-    @Put(':reglaId/examens')
+    @Put(':reglaId/examenes')
     async associateExamensRegla(@Body() examensDto: ExamenDto[], @Param('reglaId') reglaId: string){
     const examens = plainToInstance(ExamenEntity, examensDto)
     return await this.reglaExamenService.associateExamenesRegla(reglaId, examens);
     }
 
-    @Delete(':reglaId/examens/:examenId')
+    @Delete(':reglaId/examenes/:examenId')
     @HttpCode(204)
     async deleteExamenRegla(@Param('reglaId') reglaId: string, @Param('examenId') examenId: string){
     return await this.reglaExamenService.deleteExamenRegla(reglaId, examenId);
