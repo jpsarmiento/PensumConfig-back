@@ -12,6 +12,6 @@ export class ExamenEntity {
  @Column()
  min_nota: number;
 
- @ManyToOne(()=> ReglaEntity, regla => regla.examenes)
+ @ManyToOne(()=> ReglaEntity, regla => regla.examenes, { onDelete: 'SET NULL' })
  regla: ReglaEntity;
 }

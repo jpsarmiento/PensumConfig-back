@@ -12,6 +12,6 @@ export class TerminoEntity {
  @JoinTable()
  cursos: CursoEntity[];
 
- @ManyToOne(()=> ReglaEntity, regla => regla.terminos)
+ @ManyToOne(()=> ReglaEntity, regla => regla.terminos, { onDelete: 'CASCADE' })
  regla: ReglaEntity;
 }
