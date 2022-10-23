@@ -1,4 +1,5 @@
-import {IsNotEmpty, IsString, IsNumber, IsBoolean} from 'class-validator';
+/* eslint-disable */
+import {IsNotEmpty, IsString, IsNumber} from 'class-validator';
 
 export class ExamenDto {
 

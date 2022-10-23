@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
 

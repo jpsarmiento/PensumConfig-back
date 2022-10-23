@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { AreaEntity } from '../area/area.entity';
 import { RequisitoEntity } from '../requisito/requisito.entity';

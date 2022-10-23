@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable */
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
@@ -57,17 +57,6 @@ async findTerminosByReglaId(reglaId: string): Promise<TerminoEntity[]> {
    
     return regla.terminos;
 }
-
-/*
-async findTerminosByReglaId(reglaId: string): Promise<TerminoEntity[]> {
-  const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});
-  if (!regla)
-    throw new BusinessLogicException('No se encontro la regla con el id dado', BusinessError.NOT_FOUND)
-  const terminos: TerminoEntity[] = await this.terminoRepository.find({ where: {regla: regla}, relations: ["regla","cursos"] })
- 
-  return terminos;
-}
- */
 
 async associateTerminosRegla(reglaId: string, terminos: TerminoEntity[]): Promise<ReglaEntity> {
     const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id: reglaId}, relations: ["terminos"]});

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { DepartamentoEntity } from '../departamento/departamento.entity';
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable, ManyToOne } from 'typeorm';
 import { ProgramaEntity } from '../programa/programa.entity';

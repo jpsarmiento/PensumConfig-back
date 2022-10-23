@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { ExamenService } from './examen.service';

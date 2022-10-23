@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable */
 import {Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne, JoinTable } from 'typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
 import { CursoEntity } from '../curso/curso.entity';

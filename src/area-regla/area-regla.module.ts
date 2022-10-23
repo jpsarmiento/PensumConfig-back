@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AreaEntity } from '../area/area.entity';

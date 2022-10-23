@@ -1,10 +1,10 @@
+/* eslint-disable */
 import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { TerminoEntity } from './termino.entity';
 import { TerminoService } from './termino.service';
-import { faker } from '@faker-js/faker';
 
 describe('TerminoService', () => {
   let service: TerminoService;

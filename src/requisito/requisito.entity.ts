@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, JoinTable } from 'typeorm';
 import { ProgramaEntity } from '../programa/programa.entity';
 

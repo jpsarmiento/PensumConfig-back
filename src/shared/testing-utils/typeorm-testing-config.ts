@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProgramaEntity } from '../../programa/programa.entity'; 
 import { RequisitoEntity } from '../../requisito/requisito.entity';

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany } from 'typeorm';
 import { AreaEntity } from '../area/area.entity';
 import { ExamenEntity } from '../examen/examen.entity';

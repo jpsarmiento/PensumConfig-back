@@ -1,4 +1,4 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable */
 import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { plainToInstance } from 'class-transformer';
 import { CursoDto } from '../curso/curso.dto';

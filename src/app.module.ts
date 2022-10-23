@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -18,14 +19,6 @@ import { TerminoEntity } from './termino/termino.entity';
 import { DepartamentoEntity } from './departamento/departamento.entity';
 import { CursoEntity } from './curso/curso.entity';
 import { DepartamentoModule } from './departamento/departamento.module';
-import { ProgramaRequisitoService } from './programa-requisito/programa-requisito.service';
-import { ProgramaAreaService } from './programa-area/programa-area.service';
-import { AreaReglaService } from './area-regla/area-regla.service';
-import { ReglaExamenService } from './regla-examen/regla-examen.service';
-import { ReglaTerminoService } from './regla-termino/regla-termino.service';
-import { TerminoCursoService } from './termino-curso/termino-curso.service';
-import { DepartamentoCursoService } from './departamento-curso/departamento-curso.service';
-import { DepartamentoAreaService } from './departamento-area/departamento-area.service';
 import { DepartamentoAreaModule } from './departamento-area/departamento-area.module';
 import { DepartamentoCursoModule } from './departamento-curso/departamento-curso.module';
 import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';

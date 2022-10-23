@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { AreaEntity } from '../area/area.entity';
 import { CursoEntity } from '../curso/curso.entity';
 import { Column, Entity, PrimaryGeneratedColumn, OneToMany} from 'typeorm';

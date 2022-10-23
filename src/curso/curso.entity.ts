@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne} from 'typeorm';
 import { TerminoEntity } from '../termino/termino.entity';
 import { DepartamentoEntity } from '../departamento/departamento.entity';

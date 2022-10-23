@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {IsNotEmpty, IsString, IsNumber, IsBoolean} from 'class-validator';
 
 export class CursoDto {
