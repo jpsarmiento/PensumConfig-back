@@ -12,9 +12,6 @@ export class DepartamentoEntity {
     @Column()
     nombre: string;
 
-    @OneToMany(()=> CursoEntity, curso => curso.depto)
-    cursos: CursoEntity[];
-
     @OneToMany(()=> AreaEntity, area => area.depto)
     areas: AreaEntity[];
 }

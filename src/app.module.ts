@@ -20,7 +20,6 @@ import { DepartamentoEntity } from './departamento/departamento.entity';
 import { CursoEntity } from './curso/curso.entity';
 import { DepartamentoModule } from './departamento/departamento.module';
 import { DepartamentoAreaModule } from './departamento-area/departamento-area.module';
-import { DepartamentoCursoModule } from './departamento-curso/departamento-curso.module';
 import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';
 import { ProgramaAreaModule } from './programa-area/programa-area.module';
 import { AreaReglaModule } from './area-regla/area-regla.module';
@@ -31,7 +30,7 @@ import { TerminoCursoModule } from './termino-curso/termino-curso.module';
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, 
     TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, 
-    DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule,
+    DepartamentoAreaModule, ProgramaRequisitoModule,
     ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, 
     TerminoCursoModule, TypeOrmModule.forRoot({
     type: 'postgres',
@@ -44,7 +43,7 @@ import { TerminoCursoModule } from './termino-curso/termino-curso.module';
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }), DepartamentoAreaModule, DepartamentoCursoModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
+    }), DepartamentoAreaModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

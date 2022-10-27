@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 import { CursoEntity } from './curso.entity';
 
 var siglas =    ['ADMI','AFIN','ANTR','ARQT','ARQU','ARTE','ARTI','AUTO','BCOM','BIOL',
@@ -18,6 +18,8 @@ var siglas =    ['ADMI','AFIN','ANTR','ARQT','ARQU','ARTE','ARTI','AUTO','BCOM',
                 'MMER','MMUS','MPAZ','MPCU','MPER','MPET','MSCM','MSIN','MTRI','MTRM','MUSI',
                 'PATO','PEDI','PMED','PSCL','PSIC','QUIM','SOCI','SPUB','STRA','VICE']
 
+var letras =    ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+
 @Injectable()
 export class CursoService {
 
@@ -27,18 +29,22 @@ export class CursoService {
     ){}
 
     async findAll(): Promise<CursoEntity[]> {
-        return await this.cursoRepository.find({ relations: ["terminos","depto"] });
+        return await this.cursoRepository.find({ relations: ["terminos"] });
+    }
+
+    async findByQuery(query: string): Promise<CursoEntity[]> {
+        return await this.cursoRepository.findBy({ sigla: Like(`%${query}%`)})
     }
 
     async findOne(id: string): Promise<CursoEntity> {
-        const curso: CursoEntity = await this.cursoRepository.findOne({where: {id}, relations: ["terminos","depto"] } );
+        const curso: CursoEntity = await this.cursoRepository.findOne({where: {id}, relations: ["terminos"] } );
         if (!curso)
           throw new BusinessLogicException("No se encontro el curso con el id dado", BusinessError.NOT_FOUND);
    
         return curso;
     }
 
-    async findCodigoSigla(sigla: string, codigo: number):Promise<CursoEntity[]> {
+    async findCodigoSigla(sigla: string, codigo: string):Promise<CursoEntity[]> {
         return await this.cursoRepository.find({where: {sigla: sigla, codigo: codigo}});
     }
 
@@ -53,10 +59,10 @@ export class CursoService {
                     'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
                 )
         }
-        if(curso.codigo < 1000 || curso.codigo > 7000) {
-                throw new BusinessLogicException(
-                    'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000', BusinessError.PRECONDITION_FAILED
-                )
+        if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && letras.includes(curso.codigo.charAt(4))) ) {
+            throw new BusinessLogicException(
+                'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra', BusinessError.PRECONDITION_FAILED
+            )
         }
         if(curso.creditos < 0) {
                 throw new BusinessLogicException(
@@ -82,9 +88,9 @@ export class CursoService {
                     'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
                 )
             }
-            if(curso.codigo < 1000 || curso.codigo > 7000) {
+            if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && letras.includes(curso.codigo.charAt(4))) ) {
                 throw new BusinessLogicException(
-                    'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000', BusinessError.PRECONDITION_FAILED
+                    'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra', BusinessError.PRECONDITION_FAILED
                 )
             }
         }

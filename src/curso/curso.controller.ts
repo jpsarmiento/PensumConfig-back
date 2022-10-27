@@ -23,6 +23,11 @@ export class CursoController {
         return await this.cursoService.findOne(cursoId);
     }
 
+    @Get('query')
+    async findByQuery(@Param('query') query: string) {
+        return await this.cursoService.findByQuery(query);
+    }
+
     @Post()
     async create(@Body() cursoDto: CursoDto) {
     const curso: CursoEntity = plainToInstance(CursoEntity, cursoDto);

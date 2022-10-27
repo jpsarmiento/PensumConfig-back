@@ -13,11 +13,15 @@ export class CursoDto {
 
     @IsNumber()
     @IsNotEmpty()
-    readonly codigo: number;
+    readonly codigo: string;
     
     @IsNumber()
     @IsNotEmpty()
     readonly creditos: number;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly departamento: string;
 
     @IsBoolean()
     @IsNotEmpty()

@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne} from 'typeorm';
 import { TerminoEntity } from '../termino/termino.entity';
-import { DepartamentoEntity } from '../departamento/departamento.entity';
 
 @Entity()
 export class CursoEntity {
@@ -15,10 +14,13 @@ export class CursoEntity {
  sigla: string;
 
  @Column()
- codigo: number;
+ codigo: string;
  
  @Column()
  creditos: number;
+
+ @Column()
+ departamento: string;
 
  @Column()
  es_epsilon: boolean;
@@ -28,7 +30,4 @@ export class CursoEntity {
 
  @ManyToMany(()=> TerminoEntity, termino => termino.cursos)
  terminos: TerminoEntity[];
-
- @ManyToOne(()=> DepartamentoEntity, departamento => departamento.areas)
- depto: DepartamentoEntity;
 }
