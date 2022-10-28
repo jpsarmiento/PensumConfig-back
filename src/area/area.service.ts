@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { AreaEntity } from './area.entity';
 
 @Injectable()
@@ -13,8 +13,17 @@ export class AreaService {
         private readonly areaRepository: Repository<AreaEntity>
     ){}
 
-    async findAll(): Promise<AreaEntity[]> {
-        return await this.areaRepository.find({ relations: ["programas", "reglas"] });
+    async findAll(query: string): Promise<AreaEntity[]> {
+        if(!query)
+            return await this.areaRepository.find({ order: { nombre: "ASC"}, relations: ["programas", "reglas"], take: 24 });
+
+        return await (await this.areaRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
+            if (obj1.nombre > obj2.nombre)
+                return 1;
+            if (obj1.nombre < obj2.nombre)
+                return -1;
+            return 0;
+        });
     }
 
     async findOne(id: string): Promise<AreaEntity> {

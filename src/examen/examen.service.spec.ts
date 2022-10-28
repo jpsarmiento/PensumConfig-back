@@ -40,7 +40,7 @@ describe('ExamenService', () => {
 
 
   it('findAll should return all examenes', async () => {
-    const examenes: ExamenEntity[] = await service.findAll();
+    const examenes: ExamenEntity[] = await service.findAll(null);
     expect(examenes).not.toBeNull();
     expect(examenes).toHaveLength(examenesList.length);
   });

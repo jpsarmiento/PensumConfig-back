@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { ReglaEntity } from './regla.entity';
 
 @Injectable()
@@ -13,12 +13,21 @@ export class ReglaService {
         private readonly reglaRepository: Repository<ReglaEntity>
     ){}
 
-    async findAll(): Promise<ReglaEntity[]> {
-        return await this.reglaRepository.find({ relations: ["examenes", "terminos", "terminos.cursos","areas"] });
+    async findAll(query: string): Promise<ReglaEntity[]> {
+        if(!query)
+            return await this.reglaRepository.find({ order: { nombre: "ASC"}, relations: ["examenes", "terminos", "terminos.cursos", "areas"], take: 24 });
+
+        return await (await this.reglaRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
+            if (obj1.nombre > obj2.nombre)
+                return 1;
+            if (obj1.nombre < obj2.nombre)
+                return -1;
+            return 0;
+        });
     }
 
     async findOne(id: string): Promise<ReglaEntity> {
-        const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id}, relations: ["examenes", "terminos","areas"] } );
+        const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id}, relations: ["examenes", "terminos", "terminos.cursos", "areas"] } );
         if (!regla)
           throw new BusinessLogicException("No se encontro el regla con el id dado", BusinessError.NOT_FOUND);
    

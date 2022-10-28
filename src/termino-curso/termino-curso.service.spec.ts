@@ -24,7 +24,8 @@ describe('TerminoCursoService', () => {
       const curso: CursoEntity = await cursoRepository.save({
        nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
+       departamento:"ISIS",
        creditos: faker.datatype.number({min: 1, max: 10}),
        es_epsilon: false,
        es_tipo_e: false})
@@ -55,8 +56,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
       nombre: "Curso nombre",
        sigla: "MINE",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
 
@@ -81,8 +83,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
       nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
  
@@ -112,8 +115,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
        nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 9999}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
  
@@ -133,8 +137,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
       nombre: "Curso nombre",
        sigla: "MISW",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
  
@@ -150,8 +155,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
       nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
  
@@ -190,8 +196,9 @@ describe('TerminoCursoService', () => {
     const newCurso: CursoEntity = await cursoRepository.save({
       nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 9999}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 9999}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
  

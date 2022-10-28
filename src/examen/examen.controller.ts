@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete, Query } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { ExamenService } from './examen.service';
 import { plainToInstance } from 'class-transformer';
@@ -15,12 +15,17 @@ export class ExamenController {
     
     @Get()
     async findAll() {
-        return await this.examenService.findAll();
+        return await this.examenService.findAll(null);
     }
 
     @Get(':examenId')
     async findOne(@Param('examenId') examenId: string) {
         return await this.examenService.findOne(examenId);
+    }
+    
+    @Get('findByFilter/param?')
+    async findByFilter(@Query('query') nombre: string): Promise<ExamenEntity[]> {
+    return await this.examenService.findAll(nombre);
     }
 
     @Post()

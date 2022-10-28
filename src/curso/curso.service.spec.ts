@@ -19,8 +19,9 @@ describe('CursoService', () => {
        const curso: CursoEntity = await repository.save({
        nombre: "Curso nombre",
        sigla: "ISIS",
-       codigo: faker.datatype.number({min: 1001, max: 7000}),
+       codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
        creditos: faker.datatype.number({min: 1, max: 10}),
+       departamento: "ISIS",
        es_epsilon: false,
        es_tipo_e: false})
        cursosList.push(curso);
@@ -44,7 +45,7 @@ describe('CursoService', () => {
 
 
   it('findAll should return all cursos', async () => {
-    const cursos: CursoEntity[] = await service.findAll();
+    const cursos: CursoEntity[] = await service.findAll(null);
     expect(cursos).not.toBeNull();
     expect(cursos).toHaveLength(cursosList.length);
   });
@@ -68,11 +69,11 @@ describe('CursoService', () => {
       id: "",
       nombre: "Curso X",
       sigla: "MINE",
-      codigo: faker.datatype.number({min: 1001, max: 7000}),
+      codigo: ""+faker.datatype.number({min: 1001, max: 7000}),
       creditos: faker.datatype.number({min: 1, max: 10}),
       es_epsilon: false,
       es_tipo_e: false,
-      depto: null,
+      departamento: "ISIS",
       terminos: null
     }
   
@@ -92,14 +93,14 @@ describe('CursoService', () => {
       id: "",
       nombre: "Curso X",
       sigla: "MINE",
-      codigo: 12,
+      codigo: ""+12,
       creditos: faker.datatype.number({min: 1, max: 10}),
       es_epsilon: false,
       es_tipo_e: false,
-      depto: null,
+      departamento: "ISIS",
       terminos: null
     }
-    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'El codigo del curso debe ser un numero de cuatro digitos entre el 1000 y el 7000')
+    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra')
   });
   
   it('update should modify a curso', async () => {

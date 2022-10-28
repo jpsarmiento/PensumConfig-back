@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, Param, Query, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { AreaService } from './area.service';
 import { plainToInstance } from 'class-transformer';
@@ -15,12 +15,17 @@ export class AreaController {
     
     @Get()
     async findAll() {
-        return await this.areaService.findAll();
+        return await this.areaService.findAll(null);
     }
 
     @Get(':areaId')
     async findOne(@Param('areaId') areaId: string) {
         return await this.areaService.findOne(areaId);
+    }
+
+    @Get('findByFilter/param?')
+    async findByFilter(@Query('query') nombre: string): Promise<AreaEntity[]> {
+    return await this.areaService.findAll(nombre);
     }
 
     @Post()

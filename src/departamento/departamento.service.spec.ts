@@ -38,7 +38,7 @@ describe('DepartamentoService', () => {
 
 
   it('findAll should return all departamentos', async () => {
-    const departamentos: DepartamentoEntity[] = await service.findAll();
+    const departamentos: DepartamentoEntity[] = await service.findAll(null);
     expect(departamentos).not.toBeNull();
     expect(departamentos).toHaveLength(departamentosList.length);
   });
@@ -58,7 +58,6 @@ describe('DepartamentoService', () => {
     const departamento: DepartamentoEntity = {
       id: "",
       nombre: "Musica",
-      cursos: null,
       areas: null
     }
   

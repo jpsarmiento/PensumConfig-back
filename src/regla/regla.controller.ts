@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, Param, Post, Body, Put, HttpCode, Delete, Query } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { ReglaService } from './regla.service';
 import { plainToInstance } from 'class-transformer';
@@ -15,12 +15,17 @@ export class ReglaController {
     
     @Get()
     async findAll() {
-        return await this.reglaService.findAll();
+        return await this.reglaService.findAll(null);
     }
 
     @Get(':reglaId')
     async findOne(@Param('reglaId') reglaId: string) {
         return await this.reglaService.findOne(reglaId);
+    }
+
+    @Get('findByFilter/param?')
+    async findByFilter(@Query('query') nombre: string): Promise<ReglaEntity[]> {
+    return await this.reglaService.findAll(nombre);
     }
 
     @Post()

@@ -41,7 +41,7 @@ describe('ProgramaService', () => {
 
 
   it('findAll should return all programas', async () => {
-    const programas: ProgramaEntity[] = await service.findAll();
+    const programas: ProgramaEntity[] = await service.findAll(null);
     expect(programas).not.toBeNull();
     expect(programas).toHaveLength(programasList.length);
   });

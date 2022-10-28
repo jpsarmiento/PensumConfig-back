@@ -42,7 +42,7 @@ describe('ReglaService', () => {
 
 
   it('findAll should return all reglas', async () => {
-    const reglas: ReglaEntity[] = await service.findAll();
+    const reglas: ReglaEntity[] = await service.findAll(null);
     expect(reglas).not.toBeNull();
     expect(reglas).toHaveLength(reglasList.length);
   });

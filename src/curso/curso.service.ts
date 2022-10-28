@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Like, Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { CursoEntity } from './curso.entity';
 
 var siglas =    ['ADMI','AFIN','ANTR','ARQT','ARQU','ARTE','ARTI','AUTO','BCOM','BIOL',
@@ -28,12 +28,19 @@ export class CursoService {
         private readonly cursoRepository: Repository<CursoEntity>
     ){}
 
-    async findAll(): Promise<CursoEntity[]> {
-        return await this.cursoRepository.find({ relations: ["terminos"] });
-    }
+    async findAll(query: string): Promise<CursoEntity[]> {
+        if(!query)
+            return await this.cursoRepository.find({ order: { sigla: "ASC", codigo: "ASC" }, relations: ["terminos"], take: 24 });
 
-    async findByQuery(query: string): Promise<CursoEntity[]> {
-        return await this.cursoRepository.findBy({ sigla: Like(`%${query}%`)})
+        return await (await this.cursoRepository.findBy({ sigla: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
+            if (obj1.sigla > obj2.sigla)
+                return 1;
+            if (obj1.sigla < obj2.sigla)
+                return -1;
+            if (obj1.codigo > obj2.codigo)
+                return 1;
+            return -1
+        });
     }
 
     async findOne(id: string): Promise<CursoEntity> {

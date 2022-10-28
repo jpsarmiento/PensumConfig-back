@@ -40,7 +40,7 @@ describe('RequisitoService', () => {
 
 
   it('findAll should return all requisitos', async () => {
-    const requisitos: RequisitoEntity[] = await service.findAll();
+    const requisitos: RequisitoEntity[] = await service.findAll(null);
     expect(requisitos).not.toBeNull();
     expect(requisitos).toHaveLength(requisitosList.length);
   });
@@ -81,7 +81,7 @@ describe('RequisitoService', () => {
       descripcion: "descr",
       programas: null
     }
-    await expect(() => service.create(requisito)).rejects.toHaveProperty("message", 'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura ingles o Lengua extranjera')
+    await expect(() => service.create(requisito)).rejects.toHaveProperty("message", 'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura inglés o Lengua extranjera')
   });
   
   it('update should modify a requisito', async () => {

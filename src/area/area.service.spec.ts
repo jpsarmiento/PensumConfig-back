@@ -41,7 +41,7 @@ describe('AreaService', () => {
 
 
   it('findAll should return all areas', async () => {
-    const areas: AreaEntity[] = await service.findAll();
+    const areas: AreaEntity[] = await service.findAll(null);
     expect(areas).not.toBeNull();
     expect(areas).toHaveLength(areasList.length);
   });

@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { DepartamentoEntity } from './departamento.entity';
 
 var deptos =    ['Centro de Estudios en Periodismo', 'Antropologia',
@@ -22,12 +22,21 @@ export class DepartamentoService {
         private readonly departamentoRepository: Repository<DepartamentoEntity>
     ){}
 
-    async findAll(): Promise<DepartamentoEntity[]> {
-        return await this.departamentoRepository.find({ relations: ["areas", "cursos"] });
+    async findAll(query: string): Promise<DepartamentoEntity[]> {
+        if(!query)
+            return await this.departamentoRepository.find({ order: { nombre: "ASC"}, relations: ["areas"], take: 24 });
+
+        return await (await this.departamentoRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
+            if (obj1.nombre > obj2.nombre)
+                return 1;
+            if (obj1.nombre < obj2.nombre)
+                return -1;
+            return 0;
+        });
     }
 
     async findOne(id: string): Promise<DepartamentoEntity> {
-        const departamento: DepartamentoEntity = await this.departamentoRepository.findOne({where: {id}, relations: ["areas", "cursos"] } );
+        const departamento: DepartamentoEntity = await this.departamentoRepository.findOne({where: {id}, relations: ["areas"] } );
         if (!departamento)
           throw new BusinessLogicException("No se encontro el departamento con el id dado", BusinessError.NOT_FOUND);
    

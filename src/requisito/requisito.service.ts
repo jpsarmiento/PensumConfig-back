@@ -2,7 +2,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
-import { Repository } from 'typeorm';
+import { Repository, ILike } from 'typeorm';
 import { RequisitoEntity } from './requisito.entity'; 
 
 @Injectable()
@@ -13,8 +13,17 @@ export class RequisitoService {
         private readonly requisitoRepository: Repository<RequisitoEntity>
     ){}
 
-    async findAll(): Promise<RequisitoEntity[]> {
-        return await this.requisitoRepository.find({ relations: ["programas"] });
+    async findAll(query: string): Promise<RequisitoEntity[]> {
+        if(!query)
+            return await this.requisitoRepository.find({ order: { nombre: "ASC"}, relations: ["programas"], take: 24 });
+
+        return await (await this.requisitoRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
+            if (obj1.nombre > obj2.nombre)
+                return 1;
+            if (obj1.nombre < obj2.nombre)
+                return -1;
+            return 0;
+        });
     }
 
     async findOne(id: string): Promise<RequisitoEntity> {
@@ -26,9 +35,9 @@ export class RequisitoService {
     }
 
     async create(requisito: RequisitoEntity): Promise<RequisitoEntity> {
-        if(requisito.nombre != 'Tipo E 1' && requisito.nombre != 'Tipo E 2' && requisito.nombre != 'Tipo Epsilon' && requisito.nombre != 'Saber Pro' && requisito.nombre != 'Lectura ingles' && requisito.nombre != 'Lengua extranjera') {
+        if(requisito.nombre != 'Tipo E 1' && requisito.nombre != 'Tipo E 2' && requisito.nombre != 'Tipo Epsilon' && requisito.nombre != 'Saber Pro' && requisito.nombre != 'Lectura inglés' && requisito.nombre != 'Lengua extranjera') {
                 throw new BusinessLogicException(
-                    'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura ingles o Lengua extranjera', BusinessError.PRECONDITION_FAILED
+                    'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura inglés o Lengua extranjera', BusinessError.PRECONDITION_FAILED
                 )
         }
         return await this.requisitoRepository.save(requisito);
