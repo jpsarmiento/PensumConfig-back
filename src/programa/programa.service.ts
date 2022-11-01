@@ -15,7 +15,7 @@ export class ProgramaService {
 
     async findAll(query: string): Promise<ProgramaEntity[]> {
         if(!query)
-            return await this.programaRepository.find({ order: { nombre: "ASC"}, relations: ["areas", "requisitos"], take: 24 });
+            return await this.programaRepository.find({ order: { nombre: "ASC"}, relations: ["areas", "requisitos", "areas.reglas", "areas.reglas.terminos", "areas.reglas.examenes", "areas.reglas.terminos.cursos"], take: 24 });
 
         return await (await this.programaRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
             if (obj1.nombre > obj2.nombre)
@@ -27,7 +27,7 @@ export class ProgramaService {
     }
 
     async findOne(id: string): Promise<ProgramaEntity> {
-        const programa: ProgramaEntity = await this.programaRepository.findOne({where: {id}, relations: ["areas", "requisitos"] } );
+        const programa: ProgramaEntity = await this.programaRepository.findOne({where: {id}, relations: ["areas", "requisitos", "areas.reglas", "areas.reglas.terminos", "areas.reglas.examenes", "areas.reglas.terminos.cursos"] } );
         if (!programa)
           throw new BusinessLogicException("No se encontro el programa con el id dado", BusinessError.NOT_FOUND);
    
@@ -42,7 +42,7 @@ export class ProgramaService {
         }
         if(programa.min_gpa < 0.0 || programa.min_gpa > 5.0) {
             throw new BusinessLogicException(
-                'El GPA minimo del programa debe ser un valor entre 0.0 y 5.0', BusinessError.PRECONDITION_FAILED
+                'El PGA minimo del programa debe ser un valor entre 0.0 y 5.0', BusinessError.PRECONDITION_FAILED
             )
         }
         return await this.programaRepository.save(programa);
@@ -60,7 +60,7 @@ export class ProgramaService {
         }
         if(programa.min_gpa < 0.0 || programa.min_gpa > 5.0) {
             throw new BusinessLogicException(
-                'El GPA minimo del programa debe ser un valor entre 0.0 y 5.0', BusinessError.PRECONDITION_FAILED
+                'El PGA minimo del programa debe ser un valor entre 0.0 y 5.0', BusinessError.PRECONDITION_FAILED
             )
         }
 

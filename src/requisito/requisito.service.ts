@@ -35,11 +35,6 @@ export class RequisitoService {
     }
 
     async create(requisito: RequisitoEntity): Promise<RequisitoEntity> {
-        if(requisito.nombre != 'Tipo E 1' && requisito.nombre != 'Tipo E 2' && requisito.nombre != 'Tipo Epsilon' && requisito.nombre != 'Saber Pro' && requisito.nombre != 'Lectura inglés' && requisito.nombre != 'Lengua extranjera') {
-                throw new BusinessLogicException(
-                    'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura inglés o Lengua extranjera', BusinessError.PRECONDITION_FAILED
-                )
-        }
         return await this.requisitoRepository.save(requisito);
     }
 
@@ -47,12 +42,6 @@ export class RequisitoService {
         const persistedrequisito: RequisitoEntity = await this.requisitoRepository.findOne({where:{id}});
         if (!persistedrequisito)
           throw new BusinessLogicException("No se encontro el requisito con el id dado", BusinessError.NOT_FOUND);
-        
-        if(requisito.nombre != 'Tipo E 1' && requisito.nombre != 'Tipo E 2' && requisito.nombre != 'Tipo Epsilon' && requisito.nombre != 'Saber Pro' && requisito.nombre != 'Lectura ingles' && requisito.nombre != 'Lengua extranjera') {
-            throw new BusinessLogicException(
-                    'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura ingles o Lengua extranjera', BusinessError.PRECONDITION_FAILED
-                )
-        }
         return await this.requisitoRepository.save({...persistedrequisito, ...requisito,});
     }
 
@@ -60,7 +49,6 @@ export class RequisitoService {
         const requisito: RequisitoEntity = await this.requisitoRepository.findOne({where:{id}});
         if (!requisito)
           throw new BusinessLogicException("No se encontro el requisito con el id dado", BusinessError.NOT_FOUND);
-     
         await this.requisitoRepository.remove(requisito);
     }
 }

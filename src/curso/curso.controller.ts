@@ -1,10 +1,13 @@
 /* eslint-disable */
-import { Controller, UseInterceptors, Get, Param, Query, Post, Body, Put, HttpCode, Delete } from '@nestjs/common';
+import { Controller, UseInterceptors, Get, Param, Query, Post, Body, Put, HttpCode, Delete, UseGuards } from '@nestjs/common';
 import { BusinessErrorsInterceptor } from '../shared/interceptors/business-errors.interceptor';
 import { CursoService } from './curso.service';
 import { plainToInstance } from 'class-transformer';
 import { CursoEntity } from './curso.entity';
 import { CursoDto } from './curso.dto';
+import { Roles } from '../user/roles.decorator';
+import { Role } from '../user/user';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('cursos')
 @UseInterceptors(BusinessErrorsInterceptor)
@@ -12,7 +15,6 @@ export class CursoController {
 
     constructor(private readonly cursoService: CursoService) {}
 
-    
     @Get()
     async findAll() {
         return await this.cursoService.findAll(null);

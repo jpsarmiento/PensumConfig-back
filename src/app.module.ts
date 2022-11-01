@@ -26,6 +26,8 @@ import { AreaReglaModule } from './area-regla/area-regla.module';
 import { ReglaExamenModule } from './regla-examen/regla-examen.module';
 import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
 import { TerminoCursoModule } from './termino-curso/termino-curso.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, 
@@ -43,7 +45,7 @@ import { TerminoCursoModule } from './termino-curso/termino-curso.module';
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }), DepartamentoAreaModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, 
+    }), DepartamentoAreaModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

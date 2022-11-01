@@ -15,7 +15,7 @@ export class AreaService {
 
     async findAll(query: string): Promise<AreaEntity[]> {
         if(!query)
-            return await this.areaRepository.find({ order: { nombre: "ASC"}, relations: ["programas", "reglas"], take: 24 });
+            return await this.areaRepository.find({ order: { nombre: "ASC"}, relations: ["programas", "reglas", "reglas.terminos", "reglas.examenes", "reglas.terminos.cursos"], take: 24 });
 
         return await (await this.areaRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
             if (obj1.nombre > obj2.nombre)
@@ -27,7 +27,7 @@ export class AreaService {
     }
 
     async findOne(id: string): Promise<AreaEntity> {
-        const area: AreaEntity = await this.areaRepository.findOne({where: {id}, relations: ["programas","reglas"] } );
+        const area: AreaEntity = await this.areaRepository.findOne({where: {id}, relations: ["programas","reglas", "reglas.terminos", "reglas.examenes", "reglas.terminos.cursos"] } );
         if (!area)
           throw new BusinessLogicException("No se encontro el area con el id dado", BusinessError.NOT_FOUND);
    
