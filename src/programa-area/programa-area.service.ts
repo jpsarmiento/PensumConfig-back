@@ -51,7 +51,7 @@ async findAreaByProgramaIdAreaId(programaId: string, areaId: string): Promise<Ar
 }
 
 async findAreasByProgramaId(programaId: string): Promise<AreaEntity[]> {
-    const programa: ProgramaEntity = await this.programaRepository.findOne({where: {id: programaId}, relations: ["areas"]});
+    const programa: ProgramaEntity = await this.programaRepository.findOne({where: {id: programaId}, relations: ["areas","areas.reglas"]});
     if (!programa)
       throw new BusinessLogicException('No se encontro el programa con el id dado', BusinessError.NOT_FOUND)
    
