@@ -7,16 +7,15 @@ import { ReglaEntity } from '../../regla/regla.entity';
 import { ExamenEntity } from '../../examen/examen.entity';
 import { TerminoEntity } from '../../termino/termino.entity';
 import { CursoEntity } from '../../curso/curso.entity';
-import { DepartamentoEntity } from '../../departamento/departamento.entity';
 
 export const TypeOrmTestingConfig = () => [
  TypeOrmModule.forRoot({
    type: 'sqlite',
    database: ':memory:',
    dropSchema: true,
-   entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity, DepartamentoEntity],
+   entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity],
    synchronize: true,
    keepConnectionAlive: true
  }),
- TypeOrmModule.forFeature([ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity, DepartamentoEntity]),
+ TypeOrmModule.forFeature([ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity]),
 ];

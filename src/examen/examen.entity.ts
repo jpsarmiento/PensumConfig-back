@@ -10,7 +10,7 @@ export class ExamenEntity {
  @Column()
  nombre: string;
  
- @Column()
+ @Column({type: 'decimal'})
  min_nota: number;
 
  @ManyToOne(()=> ReglaEntity, regla => regla.examenes, { onDelete: 'SET NULL' })

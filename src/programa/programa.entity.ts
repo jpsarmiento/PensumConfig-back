@@ -11,7 +11,7 @@ export class ProgramaEntity {
  @Column()
  nombre: string;
  
- @Column()
+ @Column({type: 'decimal'})
  min_gpa: number;
  
  @Column()

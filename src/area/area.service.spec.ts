@@ -65,7 +65,6 @@ describe('AreaService', () => {
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Media",
-      depto: null,
       reglas: null,
       programas: null
     }
@@ -86,7 +85,6 @@ describe('AreaService', () => {
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Colombia",
-      depto: null,
       reglas: null,
       programas: null
     }

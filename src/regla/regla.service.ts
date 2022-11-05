@@ -15,7 +15,7 @@ export class ReglaService {
 
     async findAll(query: string): Promise<ReglaEntity[]> {
         if(!query)
-            return await this.reglaRepository.find({ order: { nombre: "ASC"}, relations: ["examenes", "terminos", "terminos.cursos", "areas"], take: 24 });
+            return await this.reglaRepository.find({ order: { nombre: "ASC"}, relations: ["examenes", "terminos", "terminos.cursos", "areas", "areas.programas"], take: 24 });
 
         return await (await this.reglaRepository.findBy({ nombre: ILike(`%${query}%`)})).sort((obj1, obj2)=> {
             if (obj1.nombre > obj2.nombre)
@@ -27,7 +27,7 @@ export class ReglaService {
     }
 
     async findOne(id: string): Promise<ReglaEntity> {
-        const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id}, relations: ["examenes", "terminos", "terminos.cursos", "areas"] } );
+        const regla: ReglaEntity = await this.reglaRepository.findOne({where: {id}, relations: ["examenes", "terminos", "terminos.cursos", "areas", "areas.programas"] } );
         if (!regla)
           throw new BusinessLogicException("No se encontro el regla con el id dado", BusinessError.NOT_FOUND);
    

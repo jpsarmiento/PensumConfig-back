@@ -16,10 +16,7 @@ import { AreaEntity } from './area/area.entity';
 import { ReglaEntity } from './regla/regla.entity';
 import { ExamenEntity } from './examen/examen.entity';
 import { TerminoEntity } from './termino/termino.entity';
-import { DepartamentoEntity } from './departamento/departamento.entity';
 import { CursoEntity } from './curso/curso.entity';
-import { DepartamentoModule } from './departamento/departamento.module';
-import { DepartamentoAreaModule } from './departamento-area/departamento-area.module';
 import { ProgramaRequisitoModule } from './programa-requisito/programa-requisito.module';
 import { ProgramaAreaModule } from './programa-area/programa-area.module';
 import { AreaReglaModule } from './area-regla/area-regla.module';
@@ -31,8 +28,7 @@ import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, 
-    TerminoModule, CursoModule, RequisitoModule, DepartamentoModule, 
-    DepartamentoAreaModule, ProgramaRequisitoModule,
+    TerminoModule, CursoModule, RequisitoModule, ProgramaRequisitoModule,
     ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, 
     TerminoCursoModule, TypeOrmModule.forRoot({
     type: 'postgres',
@@ -41,11 +37,11 @@ import { AuthModule } from './auth/auth.module';
     username: 'postgres',
     password: 'postgres',
     database: 'pensumconfig',
-    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity, DepartamentoEntity],
+    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity],
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-    }), DepartamentoAreaModule, ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, 
+    }), ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, 
   ],
   controllers: [AppController],
   providers: [AppService],
