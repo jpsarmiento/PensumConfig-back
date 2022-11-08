@@ -17,6 +17,9 @@ export class AreaEntity {
  @Column()
  prioridad: string;
 
+ @Column()
+ tipo: string;
+
  @ManyToMany(()=> ProgramaEntity, programa => programa.areas)
  programas: ProgramaEntity[];
 

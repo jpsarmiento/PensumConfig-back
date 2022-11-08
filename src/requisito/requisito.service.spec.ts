@@ -73,16 +73,6 @@ describe('RequisitoService', () => {
     expect(storedRequisito.nombre).toEqual(newRequisito.nombre)
     expect(storedRequisito.descripcion).toEqual(newRequisito.descripcion)
   });
-
-  it('create requisito without precondition should return error', async () => {
-    const requisito: RequisitoEntity = {
-      id: "",
-      nombre: "Nuevo requisito",
-      descripcion: "descr",
-      programas: null
-    }
-    await expect(() => service.create(requisito)).rejects.toHaveProperty("message", 'El nombre del requisito debe ser Tipo E 1, Tipo E 2, Tipo Epsilon, Saber Pro, Lectura inglés o Lengua extranjera')
-  });
   
   it('update should modify a requisito', async () => {
     const requisito: RequisitoEntity = requisitosList[0];
@@ -92,14 +82,6 @@ describe('RequisitoService', () => {
     const storedRequisito: RequisitoEntity = await repository.findOne({ where: { id: requisito.id } })
     expect(storedRequisito).not.toBeNull();
     expect(storedRequisito.nombre).toEqual(requisito.nombre)
-  });
-  
-  it('update should throw an exception for an invalid requisito', async () => {
-    let requisito: RequisitoEntity = requisitosList[0];
-    requisito = {
-      ...requisito, nombre: "Lengua extranjera", descripcion: "descripcion del req"
-    }
-    await expect(() => service.update("0", requisito)).rejects.toHaveProperty("message", 'No se encontro el requisito con el id dado')
   });
   
   it('delete should remove a product', async () => {
@@ -114,6 +96,4 @@ describe('RequisitoService', () => {
     await service.delete(requisito.id);
     await expect(() => service.delete("0")).rejects.toHaveProperty("message", 'No se encontro el requisito con el id dado')
   });
-
-
 });

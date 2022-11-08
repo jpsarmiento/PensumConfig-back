@@ -40,6 +40,11 @@ export class AreaService {
                     'La prioridad del area debe ser Muy alta, Alta, Media o Baja', BusinessError.PRECONDITION_FAILED
                 )
         }
+        if(area.tipo != 'Conocimiento' && area.tipo != 'Semestre') {
+            throw new BusinessLogicException(
+                'El tipo del area debe ser Conocimiento o Semestre', BusinessError.PRECONDITION_FAILED
+            )
+    }
         if(area.creditos < 0) {
             throw new BusinessLogicException(
                 'El numero de creditos del area no puede ser un numero negativo', BusinessError.PRECONDITION_FAILED

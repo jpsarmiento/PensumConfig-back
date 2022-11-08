@@ -19,6 +19,7 @@ describe('AreaService', () => {
        const area: AreaEntity = await repository.save({
        nombre: "Area nombre",
        creditos: faker.datatype.number({min: 1, max: 10}),
+       tipo: "Semestre",
        prioridad: "Alta"})
        areasList.push(area);
    }
@@ -65,6 +66,7 @@ describe('AreaService', () => {
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Media",
+      tipo: "Semestre",
       reglas: null,
       programas: null
     }
@@ -85,6 +87,7 @@ describe('AreaService', () => {
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Colombia",
+      tipo: "Semestre",
       reglas: null,
       programas: null
     }

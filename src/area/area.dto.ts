@@ -14,4 +14,8 @@ export class AreaDto {
     @IsString()
     @IsNotEmpty()
     readonly prioridad: string;
+
+    @IsString()
+    @IsNotEmpty()
+    readonly tipo: string;
 }

@@ -24,6 +24,7 @@ describe('ProgramaAreaService', () => {
       const area: AreaEntity = await areaRepository.save({
         nombre: "Area nombre",
         creditos: faker.datatype.number({min: 1, max: 10}),
+        tipo: "Conocimiento",
         prioridad: "Alta"})
         areasList.push(area);
   }
@@ -55,6 +56,7 @@ describe('ProgramaAreaService', () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
       creditos: faker.datatype.number({min: 1, max: 10}),
+      tipo: "Conocimiento",
       prioridad: "Alta"})
 
     const newPrograma: ProgramaEntity = await programaRepository.save({
@@ -82,6 +84,7 @@ describe('ProgramaAreaService', () => {
   it('addAreaPrograma should throw an exception for an invalid programa', async () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
+      tipo: "Conocimiento",
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Alta"})
  
@@ -109,6 +112,7 @@ describe('ProgramaAreaService', () => {
   it('findAreaByProgramaIdAreaId should throw an exception for a area not associated to a programa', async () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
+      tipo: "Conocimiento",
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Alta"})
  
@@ -127,6 +131,7 @@ describe('ProgramaAreaService', () => {
   it('associateAreasPrograma should update areas list for a programa', async () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
+      tipo: "Conocimiento",
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Alta"})
  
@@ -140,6 +145,7 @@ describe('ProgramaAreaService', () => {
   it('associateAreasPrograma should throw an exception for an invalid programa', async () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
+      tipo: "Conocimiento",
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Alta"})
  
@@ -177,6 +183,7 @@ describe('ProgramaAreaService', () => {
   it('deleteAreaToPrograma should thrown an exception for a non asocciated area', async () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: "Area nombre",
+      tipo: "Semestre",
       creditos: faker.datatype.number({min: 1, max: 10}),
       prioridad: "Alta"})
  

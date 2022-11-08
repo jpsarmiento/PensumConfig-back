@@ -32,6 +32,7 @@ describe('AreaReglaService', () => {
     area = await areaRepository.save({
       nombre: "Area nombre",
       creditos: faker.datatype.number({min: 1, max: 10}),
+      tipo: "Semestre",
       prioridad: "Alta",
       reglas: reglasList
     });
@@ -64,7 +65,8 @@ describe('AreaReglaService', () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
-      prioridad: "Media"
+      prioridad: "Media",
+      tipo: "Conocimiento"
     })
 
    const result: AreaEntity = await service.addReglaToArea(newArea.id, newRegla.id);
@@ -80,7 +82,8 @@ describe('AreaReglaService', () => {
     const newArea: AreaEntity = await areaRepository.save({
       nombre: faker.company.name(),
       creditos: faker.datatype.number({min: 1, max: 10}),
-      prioridad: "Baja"
+      prioridad: "Baja",
+      tipo: "Conocimiento"
     })
  
     await expect(() => service.addReglaToArea(newArea.id, "0")).rejects.toHaveProperty("message", 'No se encontro la regla con el id dado');
