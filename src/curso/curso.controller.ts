@@ -29,19 +29,22 @@ export class CursoController {
     async findByFilter(@Query('query') sigla: string): Promise<CursoEntity[]> {
     return await this.cursoService.findAll(sigla);
 }
-
+    
+    @UseGuards(JwtAuthGuard)
     @Post()
     async create(@Body() cursoDto: CursoDto) {
     const curso: CursoEntity = plainToInstance(CursoEntity, cursoDto);
     return await this.cursoService.create(curso);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Put(':cursoId')
     async update(@Param('cursoId') cursoId: string, @Body() cursoDto: CursoDto) {
     const curso: CursoEntity = plainToInstance(CursoEntity, cursoDto);
     return await this.cursoService.update(cursoId, curso);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Delete(':cursoId')
     @HttpCode(204)
     async delete(@Param('cursoId') cursoId: string) {

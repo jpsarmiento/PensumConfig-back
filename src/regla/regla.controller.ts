@@ -13,7 +13,6 @@ export class ReglaController {
 
     constructor(private readonly reglaService: ReglaService) {}
 
-    
     @Get()
     async findAll() {
         return await this.reglaService.findAll(null);
