@@ -13,16 +13,22 @@ export class AreaController {
 
     constructor(private readonly areaService: AreaService) {}
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.areaService.findAll(null);
     }
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get(':areaId')
     async findOne(@Param('areaId') areaId: string) {
         return await this.areaService.findOne(areaId);
     }
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get('findByFilter/param?')
     async findByFilter(@Query('query') nombre: string): Promise<AreaEntity[]> {
     return await this.areaService.findAll(nombre);

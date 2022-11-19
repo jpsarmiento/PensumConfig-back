@@ -18,11 +18,13 @@ export class ReglaTerminoController {
     return await this.reglaTerminoService.addTerminoToRegla(reglaId, terminoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':reglaId/terminos/:terminoId')
     async findTerminoByReglaIdTerminoId(@Param('reglaId') reglaId: string, @Param('terminoId') terminoId: string){
     return await this.reglaTerminoService.findTerminoByReglaIdTerminoId(reglaId, terminoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':reglaId/terminos')
     async findTerminosByReglaId(@Param('reglaId') reglaId: string){
     return await this.reglaTerminoService.findTerminosByReglaId(reglaId);

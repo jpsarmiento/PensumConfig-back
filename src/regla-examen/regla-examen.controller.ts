@@ -18,11 +18,13 @@ export class ReglaExamenController {
     return await this.reglaExamenService.addExamenToRegla(reglaId, examenId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':reglaId/examenes/:examenId')
     async findExamenByReglaIdExamenId(@Param('reglaId') reglaId: string, @Param('examenId') examenId: string){
     return await this.reglaExamenService.findExamenByReglaIdExamenId(reglaId, examenId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':reglaId/examenes')
     async findExamensByReglaId(@Param('reglaId') reglaId: string){
     return await this.reglaExamenService.findExamenesByReglaId(reglaId);

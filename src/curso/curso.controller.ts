@@ -15,11 +15,15 @@ export class CursoController {
 
     constructor(private readonly cursoService: CursoService) {}
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.cursoService.findAll(null);
     }
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get(':cursoId')
     async findOne(@Param('cursoId') cursoId: string) {
         return await this.cursoService.findOne(cursoId);

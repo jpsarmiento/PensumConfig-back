@@ -38,7 +38,7 @@ import { AuthModule } from './auth/auth.module';
     password: 'postgres',
     database: 'pensumconfig',
     entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity],
-    dropSchema: true,
+    dropSchema: false,
     synchronize: true,
     keepConnectionAlive: true
     }), ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, 

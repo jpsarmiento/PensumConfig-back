@@ -19,11 +19,15 @@ export class AreaReglaController {
     return await this.areaReglaService.addReglaToArea(areaId, reglaId);
     }
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get(':areaId/reglas/:reglaId')
     async findReglaByAreaIdReglaId(@Param('areaId') areaId: string, @Param('reglaId') reglaId: string){
     return await this.areaReglaService.findReglaByAreaIdReglaId(areaId, reglaId);
     }
 
+    
+    @UseGuards(JwtAuthGuard)
     @Get(':areaId/reglas')
     async findReglasByAreaId(@Param('areaId') areaId: string){
     return await this.areaReglaService.findReglasByAreaId(areaId);

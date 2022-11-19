@@ -13,16 +13,19 @@ export class RequisitoController {
 
     constructor(private readonly requisitoService: RequisitoService) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.requisitoService.findAll(null);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':requisitoId')
     async findOne(@Param('requisitoId') requisitoId: string) {
         return await this.requisitoService.findOne(requisitoId);
     }
     
+    @UseGuards(JwtAuthGuard)
     @Get('findByFilter/param?')
     async findByFilter(@Query('query') nombre: string): Promise<RequisitoEntity[]> {
     return await this.requisitoService.findAll(nombre);

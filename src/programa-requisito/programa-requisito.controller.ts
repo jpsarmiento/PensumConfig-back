@@ -18,11 +18,13 @@ export class ProgramaRequisitoController {
     return await this.programaRequisitoService.addRequisitoToPrograma(programaId, requisitoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':programaId/requisitos/:requisitoId')
     async findRequisitoByProgramaIdRequisitoId(@Param('programaId') programaId: string, @Param('requisitoId') requisitoId: string){
     return await this.programaRequisitoService.findRequisitoByProgramaIdRequisitoId(programaId, requisitoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':programaId/requisitos')
     async findRequisitosByProgramaId(@Param('programaId') programaId: string){
     return await this.programaRequisitoService.findRequisitosByProgramaId(programaId);

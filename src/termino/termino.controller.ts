@@ -13,11 +13,13 @@ export class TerminoController {
 
     constructor(private readonly terminoService: TerminoService) {}
     
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.terminoService.findAll();
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':terminoId')
     async findOne(@Param('terminoId') terminoId: string) {
         return await this.terminoService.findOne(terminoId);

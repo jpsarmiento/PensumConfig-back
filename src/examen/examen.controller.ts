@@ -14,16 +14,20 @@ export class ExamenController {
     constructor(private readonly examenService: ExamenService) {}
 
     
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.examenService.findAll(null);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':examenId')
     async findOne(@Param('examenId') examenId: string) {
         return await this.examenService.findOne(examenId);
     }
     
+    
+    @UseGuards(JwtAuthGuard)
     @Get('findByFilter/param?')
     async findByFilter(@Query('query') nombre: string): Promise<ExamenEntity[]> {
     return await this.examenService.findAll(nombre);

@@ -18,11 +18,13 @@ export class ProgramaAreaController {
     return await this.programaAreaService.addAreaToPrograma(programaId, areaId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':programaId/areas/:areaId')
     async findAreaByProgramaIdAreaId(@Param('programaId') programaId: string, @Param('areaId') areaId: string){
     return await this.programaAreaService.findAreaByProgramaIdAreaId(programaId, areaId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':programaId/areas')
     async findAreasByProgramaId(@Param('programaId') programaId: string){
     return await this.programaAreaService.findAreasByProgramaId(programaId);

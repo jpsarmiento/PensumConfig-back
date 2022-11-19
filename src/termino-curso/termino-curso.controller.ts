@@ -18,11 +18,13 @@ export class TerminoCursoController {
     return await this.terminoCursoService.addCursoToTermino(terminoId, cursoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':terminoId/cursos/:cursoId')
     async findCursoByTerminoIdCursoId(@Param('terminoId') terminoId: string, @Param('cursoId') cursoId: string){
     return await this.terminoCursoService.findCursoByTerminoIdCursoId(terminoId, cursoId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':terminoId/cursos')
     async findCursosByTerminoId(@Param('terminoId') terminoId: string){
     return await this.terminoCursoService.findCursosByTerminoId(terminoId);

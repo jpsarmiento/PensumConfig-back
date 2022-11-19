@@ -14,16 +14,19 @@ export class ProgramaController {
     constructor(private readonly programaService: ProgramaService) {}
 
     
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.programaService.findAll(null);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':programaId')
     async findOne(@Param('programaId') programaId: string) {
         return await this.programaService.findOne(programaId);
     }
     
+    @UseGuards(JwtAuthGuard)
     @Get('findByFilter/param?')
     async findByFilter(@Query('query') nombre: string): Promise<ProgramaEntity[]> {
     return await this.programaService.findAll(nombre);

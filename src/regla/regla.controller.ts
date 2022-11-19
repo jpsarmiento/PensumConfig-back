@@ -13,16 +13,19 @@ export class ReglaController {
 
     constructor(private readonly reglaService: ReglaService) {}
 
+    @UseGuards(JwtAuthGuard)
     @Get()
     async findAll() {
         return await this.reglaService.findAll(null);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get(':reglaId')
     async findOne(@Param('reglaId') reglaId: string) {
         return await this.reglaService.findOne(reglaId);
     }
 
+    @UseGuards(JwtAuthGuard)
     @Get('findByFilter/param?')
     async findByFilter(@Query('query') nombre: string): Promise<ReglaEntity[]> {
     return await this.reglaService.findAll(nombre);
