@@ -66,7 +66,7 @@ export class CursoService {
                     'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
                 )
         }
-        if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && letras.includes(curso.codigo.charAt(4))) ) {
+        if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && !letras.includes(curso.codigo.charAt(4))) ) {
             throw new BusinessLogicException(
                 'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra', BusinessError.PRECONDITION_FAILED
             )
@@ -95,7 +95,7 @@ export class CursoService {
                     'La sigla del curso debe ser la sigla de un departamento o programa de la universidad', BusinessError.PRECONDITION_FAILED
                 )
             }
-            if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && letras.includes(curso.codigo.charAt(4))) ) {
+            if(curso.codigo.length < 4 ||!(Number(curso.codigo.slice(0,4))>=0) || (curso.codigo.length ==5 && !(letras.includes(curso.codigo.charAt(4)))) ) {
                 throw new BusinessLogicException(
                     'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra', BusinessError.PRECONDITION_FAILED
                 )
