@@ -55,8 +55,18 @@ async findReglasByAreaId(areaId: string): Promise<ReglaEntity[]> {
     if (!area)
       throw new BusinessLogicException('No se encontro el area con el id dado', BusinessError.NOT_FOUND)
    
-    return area.reglas;
+    return area.reglas.sort(this.compare);
 }
+
+  compare(a: ReglaEntity ,b: ReglaEntity) {
+    if ( a.nombre < b.nombre ){
+      return -1;
+    }
+    if ( a.nombre > b.nombre ){
+      return 1;
+    }
+    return 0;
+  }
 
 async associateReglasArea(areaId: string, reglas: ReglaEntity[]): Promise<AreaEntity> {
     const area: AreaEntity = await this.areaRepository.findOne({where: {id: areaId}, relations: ["reglas"]});

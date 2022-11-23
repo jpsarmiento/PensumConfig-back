@@ -1,8 +1,9 @@
 /* eslint-disable */
-import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToOne, Check } from 'typeorm';
 import { ReglaEntity } from '../regla/regla.entity';
 
 @Entity()
+@Check('"min_nota" >= 0')
 export class ExamenEntity {
  @PrimaryGeneratedColumn('uuid')
  id: string;

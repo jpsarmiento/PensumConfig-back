@@ -25,6 +25,8 @@ import { ReglaTerminoModule } from './regla-termino/regla-termino.module';
 import { TerminoCursoModule } from './termino-curso/termino-curso.module';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { DepartamentoModule } from './departamento/departamento.module';
+import { DepartamentoEntity } from './departamento/departamento.entity';
 
 @Module({
   imports: [ProgramaModule, AreaModule, ReglaModule, ExamenModule, 
@@ -37,11 +39,11 @@ import { AuthModule } from './auth/auth.module';
     username: 'postgres',
     password: 'postgres',
     database: 'pensumconfig',
-    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity],
+    entities: [ProgramaEntity, RequisitoEntity, AreaEntity, ReglaEntity, ExamenEntity, TerminoEntity, CursoEntity, DepartamentoEntity],
     dropSchema: false,
     synchronize: true,
     keepConnectionAlive: true
-    }), ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, 
+    }), ProgramaRequisitoModule, ProgramaAreaModule, AreaReglaModule, ReglaExamenModule, ReglaTerminoModule, TerminoCursoModule, UserModule, AuthModule, DepartamentoModule, 
   ],
   controllers: [AppController],
   providers: [AppService],

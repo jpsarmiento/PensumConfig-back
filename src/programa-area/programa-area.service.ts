@@ -55,7 +55,17 @@ async findAreasByProgramaId(programaId: string): Promise<AreaEntity[]> {
     if (!programa)
       throw new BusinessLogicException('No se encontro el programa con el id dado', BusinessError.NOT_FOUND)
    
-    return programa.areas;
+    return programa.areas.sort(this.compare);
+}
+
+compare(a: AreaEntity ,b: AreaEntity) {
+  if ( a.nombre < b.nombre ){
+    return -1;
+  }
+  if ( a.nombre > b.nombre ){
+    return 1;
+  }
+  return 0;
 }
 
 async associateAreasPrograma(programaId: string, areas: AreaEntity[]): Promise<ProgramaEntity> {

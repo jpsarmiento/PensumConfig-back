@@ -5,8 +5,6 @@ import { CursoService } from './curso.service';
 import { plainToInstance } from 'class-transformer';
 import { CursoEntity } from './curso.entity';
 import { CursoDto } from './curso.dto';
-import { Roles } from '../user/roles.decorator';
-import { Role } from '../user/user';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('cursos')

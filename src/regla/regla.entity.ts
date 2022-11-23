@@ -1,10 +1,14 @@
 /* eslint-disable */
-import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, ManyToMany, OneToMany, Check } from 'typeorm';
 import { AreaEntity } from '../area/area.entity';
 import { ExamenEntity } from '../examen/examen.entity';
 import { TerminoEntity } from '../termino/termino.entity';
 
 @Entity()
+@Check('"creditos" >= 0')
+@Check('"semestre_inicio" > 200000')
+@Check('"semestre_vigencia" < 205002')
+@Check('"semestre_vigencia" >= "semestre_inicio"')
 export class ReglaEntity {
  @PrimaryGeneratedColumn('uuid')
  id: string;
