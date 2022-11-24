@@ -92,15 +92,15 @@ describe('CursoService', () => {
     const curso: CursoEntity = {
       id: "",
       nombre: "Curso X",
-      sigla: "MINE",
-      codigo: ""+12,
+      sigla: "MAMA",
+      codigo: "1234",
       creditos: faker.datatype.number({min: 1, max: 10}),
       es_epsilon: false,
       es_tipo_e: false,
-      departamento: "ISIS",
+      departamento: "PAPA",
       terminos: null
     }
-    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'El codigo del curso debe ser un numero de cuatro digitos o cuatro dígitos con una letra')
+    await expect(() => service.create(curso)).rejects.toHaveProperty("message", 'Error con el curso, revise la sigla, código y el departamento')
   });
   
   it('update should modify a curso', async () => {
@@ -120,7 +120,7 @@ describe('CursoService', () => {
     curso = {
       ...curso, nombre: "New name", sigla: "MISW"
     }
-    await expect(() => service.update("0", curso)).rejects.toHaveProperty("message", 'No se encontro el curso con el id dado')
+    await expect(() => service.update("0", curso)).rejects.toHaveProperty("message", 'Error con el curso, revise la sigla, código y el departamento')
   });
   
   it('delete should remove a product', async () => {

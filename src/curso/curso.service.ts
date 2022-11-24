@@ -63,7 +63,7 @@ export class CursoService {
         }
         catch (err){
             throw new BusinessLogicException(
-                'Error creando el curso, revise las sigla y el departamento', BusinessError.PRECONDITION_FAILED
+                'Error con el curso, revise la sigla, código y el departamento', BusinessError.PRECONDITION_FAILED
             )
         }
         
@@ -97,7 +97,7 @@ export class CursoService {
 
         catch (err) {
             throw new BusinessLogicException(
-                'Error creando el curso, revise las sigla y el departamento', BusinessError.PRECONDITION_FAILED
+                'Error con el curso, revise la sigla, código y el departamento', BusinessError.PRECONDITION_FAILED
             )
         }
         
